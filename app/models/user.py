@@ -1,11 +1,9 @@
-from enum import Enum
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Optional
-
 
 class Queuer(BaseModel):
-    duration: str = "1 hour"
-    rate: float = 500
-    zip_code: str = '103101'
+    duration: int = Field(60, description="Duration in minutes")
+    rate: float = Field(500, description="Rate per hour")
+    zip_code: str = Field('103101', description="ZIP code of the queuing location")
     created_at:datetime= datetime.now()
+

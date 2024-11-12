@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes.user import user_controller
 from app.routes.auth import auth_controller
+from app.routes.queue import queue_controller
 
 origin = ['*']
 
@@ -24,6 +25,7 @@ class Route:
 app_route = Route(
     user_controller,
     auth_controller,
+    queue_controller,
     )
 
 

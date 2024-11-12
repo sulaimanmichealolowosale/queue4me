@@ -15,9 +15,6 @@ class UserModel(BaseModel):
     verification_code: Optional[str] = ""
     status:str = "active"
     role: Roles = Roles.admin
-    # duration: str = "1 hour"
-    # rate: float = 500
-    # zip_code: str = '103101'
     password:str
     created_at:datetime= datetime.now()
 

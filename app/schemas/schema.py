@@ -21,10 +21,36 @@ def queuer_profile_serializer(queuer) -> dict:
     return {
         "id":str(queuer['_id']),
         "zip_code":queuer['zip_code'],
-        "duration":queuer['duration'],
-        "rate":queuer['rate'],
+        "duration":str(queuer['duration']) +" hour(s)",
+        "rate":"₦ "+ str(queuer['rate']),
         "created_at":queuer['created_at'],
     }
+    
+    
+def queue_request_serializer(request) -> dict:
+    return {
+        "id":str(request['_id']),
+        "zip_code":request['zip_code'],
+        "address":request['address'],
+        "duration":str(request['duration']) +" minutes",
+        "status":request['status'],
+        "client_id":str(request['client_id']),
+        "created_at":request['created_at'],
+    }
+    
+def applied_request_serializer(request) -> dict:
+    return {
+        "id":str(request['_id']),
+        "request_id": str(request["request_id"]),
+        "client_id": str(request["client_id"]),
+        "queuer_id": str(request["queuer_id"]),
+        "duration": str(round((request["duration"] / 60), 1)),
+        "address": request["address"] ,
+        "total": "₦ "+ str(request["total"]),
+        "zip_code": request["zip_code"],
+        "status":request["status"],
+        "created_at":request["created_at"],
+        }
 
 def auth_serializer(auth) -> dict:
     return {

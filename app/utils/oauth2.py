@@ -57,3 +57,17 @@ async def get_current_queuer(token: Annotated[str, Depends(oauth2_scheme)]):
         raise credentials_exception()
     return queuer
 
+async def get_current_admin(token: Annotated[str, Depends(oauth2_scheme)]):
+    auth_token = verify_access_token(token)
+    admin = await motor_db['user'].find_one({"_id":ObjectId(auth_token.id), "role":Roles.admin.value})
+    if admin is None:
+        raise credentials_exception()
+    return admin
+
+async def get_current_client(token: Annotated[str, Depends(oauth2_scheme)]):
+    auth_token = verify_access_token(token)
+    client = await motor_db['user'].find_one({"_id":ObjectId(auth_token.id), "role":Roles.client.value})
+    if client is None:
+        raise credentials_exception()
+    return client
+
